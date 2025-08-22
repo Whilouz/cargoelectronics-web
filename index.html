@@ -1,14 +1,56 @@
-<div class="slides" id="slides">
-  <div class="slide">
-    <img src="https://raw.githubusercontent.com/tu-usuario/cargoelectronics-web/main/imagenes/promo1.jpg" alt="Promo 1">
-    <div class="slide-caption">2x1 en Accesorios</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cargo'electronics</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background:#f9fafb; }
+    h2 { text-align:center; margin:20px 0; }
+    .slider { position:relative; overflow:hidden; max-width:800px; margin:0 auto; border-radius:12px; }
+    .slides { display:flex; transition:transform .5s ease; }
+    .slide { min-width:100%; position:relative; }
+    .slide img { width:100%; height:300px; object-fit:cover; display:block; }
+    .slide-caption { position:absolute; bottom:12px; left:12px; background:rgba(0,0,0,.55); color:#fff; padding:6px 12px; border-radius:6px; }
+    .ctrl { position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,.5); color:#fff; border:0; width:36px; height:36px; border-radius:50%; cursor:pointer; }
+    .ctrl.prev { left:8px; } .ctrl.next { right:8px; }
+  </style>
+</head>
+<body>
+  <h2>🔥 Promociones de esta semana</h2>
+  <div class="slider" aria-label="Carrusel de promociones">
+    <div class="slides" id="slides">
+      <div class="slide">
+        <img src="https://raw.githubusercontent.com/tu-usuario/cargoelectronics-web/main/imagenes/promo1.jpg" alt="Promo 1">
+        <div class="slide-caption">2x1 en Accesorios</div>
+      </div>
+      <div class="slide">
+        <img src="https://raw.githubusercontent.com/tu-usuario/cargoelectronics-web/main/imagenes/promo2.jpg" alt="Promo 2">
+        <div class="slide-caption">-30% en Audio</div>
+      </div>
+      <div class="slide">
+        <img src="https://raw.githubusercontent.com/tu-usuario/cargoelectronics-web/main/imagenes/promo3.jpg" alt="Promo 3">
+        <div class="slide-caption">Envío GRATIS</div>
+      </div>
+    </div>
+    <button class="ctrl prev" id="prevBtn">‹</button>
+    <button class="ctrl next" id="nextBtn">›</button>
   </div>
-  <div class="slide">
-    <img src="https://raw.githubusercontent.com/tu-usuario/cargoelectronics-web/main/imagenes/promo2.jpg" alt="Promo 2">
-    <div class="slide-caption">-30% en Audio</div>
-  </div>
-  <div class="slide">
-    <img src="https://raw.githubusercontent.com/tu-usuario/cargoelectronics-web/main/imagenes/promo3.jpg" alt="Promo 3">
-    <div class="slide-caption">Envío GRATIS</div>
-  </div>
-</div>
+
+  <script>
+    let index = 0;
+    const slides = document.getElementById('slides');
+    const total = slides.children.length;
+
+    function goTo(i){
+      index = (i+total)%total;
+      slides.style.transform = `translateX(-${index*100}%)`;
+    }
+    document.getElementById('prevBtn').onclick = ()=>goTo(index-1);
+    document.getElementById('nextBtn').onclick = ()=>goTo(index+1);
+
+    // auto slide
+    setInterval(()=>goTo(index+1), 4000);
+  </script>
+</body>
+</html>
